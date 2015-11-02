@@ -3,7 +3,9 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base.mk)
 include frameworks/native/build/tablet-7in-hdpi-1024-dalvik-heap.mk
 
 PRODUCT_PACKAGES += \
-    libGLES_android
+    libGLES_mesa \
+    gralloc.$(TARGET_PRODUCT) \
+    hwcomposer.$(TARGET_RRODUCT)
 
 PRODUCT_COPY_FILES := \
     frameworks/native/data/etc/android.hardware.ethernet.xml:system/etc/permissions/android.hardware.ethernet.xml \
@@ -24,8 +26,8 @@ DEVICE_PACKAGE_OVERLAYS := device/brcm/rpib2/overlay
 PRODUCT_CHARACTERISTICS := tablet,nosdcard
 PRODUCT_LOCALES := en_US
 
-PRODUCT_AAPT_CONFIG :=nomal tvdpi hdpi
-PRODUCT_AAPT_PREF_CONFIG := tvdpi
+PRODUCT_AAPT_CONFIG :=nomal tvdpi hdpi xhdpi
+PRODUCT_AAPT_PREF_CONFIG := xhdpi
 
 PRODUCT_NAME := rpib2
 PRODUCT_DEVICE := rpib2
