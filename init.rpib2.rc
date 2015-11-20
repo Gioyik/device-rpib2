@@ -27,6 +27,7 @@ on boot
     setprop net.dns2 8.8.4.4
     setprop ro.build.product rpib2
     setprop ro.product.device rpib2
+    setprop hal.gralloc drm
 
 # fake some battery state
     setprop status.battery.state Slow
