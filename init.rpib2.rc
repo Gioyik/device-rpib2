@@ -11,7 +11,7 @@ on init
     symlink /mnt/shell/emulated/0 /storage/emulated/legacy
 
 on fs
-    mount_all /fstab.rpib2
+    mount_all /fstab.rpi2
     setprop ro.crypto.state unencrypted
     setprop ro.crypto.fuse_sdcard true
 
@@ -22,12 +22,15 @@ on post-fs-data
     # Set indication (checked by vold) that we have finished this action
     setprop vold.post_fs_data_done 1
 
+on early-boot
+
+    setprop sys.fb.bits 16
+
 on boot
     setprop net.dns1 8.8.8.8
     setprop net.dns2 8.8.4.4
-    setprop ro.build.product rpib2
-    setprop ro.product.device rpib2
-    setprop hal.gralloc drm
+    setprop ro.build.product rpi2
+    setprop ro.product.device rpi2
 
 # fake some battery state
     setprop status.battery.state Slow

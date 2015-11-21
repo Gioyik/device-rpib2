@@ -14,32 +14,20 @@
 # limitations under the License.
 #
 
-ifeq ($(TARGET_PREBUILT_KERNEL),)
-LOCAL_KERNEL := device/raspberrypi/rpib2/kernel
-else
-LOCAL_KERNEL := $(TARGET_PREBUILT_KERNEL)
-endif
-
 PRODUCT_COPY_FILES := \
-	frameworks/native/data/etc/android.hardware.ethernet.xml:system/etc/permissions/android.hardware.ethernet.xml \
-	frameworks/native/data/etc/android.hardware.usb.host.xml:system/etc/permissions/android.hardware.usb.host.xml \
-	device/generic/goldfish/camera/media_profiles.xml:system/etc/media_profiles.xml \
-	device/generic/goldfish/camera/media_codecs.xml:system/etc/media_codecs.xml \
-	frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:system/etc/media_codecs_google_audio.xml \
-	frameworks/av/media/libstagefright/data/media_codecs_google_telephony.xml:system/etc/media_codecs_google_telephony.xml \
-	frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:system/etc/media_codecs_google_video.xml \
-	$(LOCAL_PATH)/init.rpi2.rc:root/init.rpi2.rc \
-	$(LOCAL_PATH)/init.usb.rc:root/init.usb.rc \
-	$(LOCAL_PATH)/fstab.rpi2:root/fstab.rpi2 \
-	$(LOCAL_KERNEL):kernel
+    frameworks/native/data/etc/android.hardware.ethernet.xml:system/etc/permissions/android.hardware.ethernet.xml \
+    frameworks/native/data/etc/android.hardware.usb.host.xml:system/etc/permissions/android.hardware.usb.host.xml \
+    device/generic/goldfish/camera/media_profiles.xml:system/etc/media_profiles.xml \
+    device/generic/goldfish/camera/media_codecs.xml:system/etc/media_codecs.xml \
+    frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:system/etc/media_codecs_google_audio.xml \
+    frameworks/av/media/libstagefright/data/media_codecs_google_telephony.xml:system/etc/media_codecs_google_telephony.xml \
+    frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:system/etc/media_codecs_google_video.xml \
+    $(LOCAL_PATH)/init.rpib2.rc:root/init.rpib2.rc \
+    $(LOCAL_PATH)/fstab.rpib2:root/fstab.rpib2 \
+    $(LOCAL_PATH)/Generic.kl:system/usr/keylayout/Generic.kl \
+    $(PRODUCT_COPY_FILES)
 
-PRODUCT_PACKAGES := \
-	libwpa_client \
-	dhcpcd.conf \
-	wpa_supplicant \
-	wpa_supplicant.conf \
-	libGLES_mesa \
-	libgralloc_drm \
-	$()
+PRODUCT_PACKAGES += \
+    libGLES_android
 
 $(call inherit-product-if-exists, vendor/raspberrypi/rpib2/device-vendor.mk)
