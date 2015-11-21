@@ -43,7 +43,7 @@ BOARD_MALLOC_ALIGNMENT := 16
 BOARD_USES_GENERIC_AUDIO := false
 BOARD_USES_USB_AUDIO := false
 
-BOARD_EGL_CFG := device/raspberrypi/rpi2/egl.cfg
+BOARD_EGL_CFG := device/raspberrypi/rpib2/egl.cfg
 USE_OPENGL_RENDERER := true
 TARGET_USE_PAN_DISPLAY := true
 
