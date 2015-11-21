@@ -19,6 +19,6 @@ $(call inherit-product, device/raspberrypi/rpib2/device.mk)
 
 PRODUCT_NAME := rpib2
 PRODUCT_DEVICE := rpib2
-PRODUCT_BRAND := Firefox OS
+PRODUCT_BRAND := FirefoxOS
 PRODUCT_MANUFACTER := raspberrypi
 PRODUCT_MODEL := rpib2
