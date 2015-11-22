@@ -28,4 +28,7 @@ PRODUCT_COPY_FILES := \
 PRODUCT_PACKAGES += \
     libGLES_android
 
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.product.version = 1.0.0
+
 $(call inherit-product-if-exists, vendor/raspberrypi/rpib2/device-vendor.mk)
