@@ -19,6 +19,9 @@ KERNEL_OUT := $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ
 KERNEL_CONFIG := $(KERNEL_OUT)/.config
 TARGET_PREBUILT_KERNEL := $(KERNEL_OUT)/arch/arm/boot/zImage
 
+$(KERNEL_OUT) :
+	mkdir -p $(KERNEL_OUT)
+
 $(TARGET_PREBUILT_KERNEL) : $(KERNEL_OUT) $(KERNEL_CONFIG)
        $(MAKE) -C kernel ARM=arm CROSS_COMPILE=arm-eabi- O=../$(KERNEL_OUT) kernel.img
 
@@ -26,8 +29,5 @@ $(KERNEL_CONFIG) : $(KERNEL_OUT)
        ARCH=arm scripts/kconfig/merge_config.sh arch/arm/configs/$(KERNEL_DEFCONFIG) android/configs/android-base.cfg android/configs/android-recommended.cfg
        ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- make zImage
        ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- make dtbs
-
-$(KERNEL_OUT) :
-	mkdir -p $(KERNEL_OUT)
 
 .PHONY : $(KERNEL_CONFIG) $(TARGET_PREBUILT_KERNEL)
