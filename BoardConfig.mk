@@ -26,6 +26,7 @@ TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
 TARGET_CPU_SMP := true
 
+TARGET_KERNEL_SOURCE := kernel/raspberrypi/rpib2
 TARGET_COMPRESS_MODULE_SYMBOLS := false
 TARGET_PRELINK_MODULE := false
 
