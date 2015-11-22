@@ -28,6 +28,6 @@ $(KERNEL_CONFIG) : $(KERNEL_OUT)
        ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- make dtbs
 
 $(KERNEL_OUT) :
-       mkdir -p $(KERNEL_OUT)
+	mkdir -p $(KERNEL_OUT)
 
 .PHONY : $(KERNEL_CONFIG) $(TARGET_PREBUILT_KERNEL)
