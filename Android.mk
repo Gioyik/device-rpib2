@@ -16,3 +16,4 @@
 
 LOCAL_PATH := $(call my-dir)
 include $(call all-makefiles-under,$(LOCAL_PATH))
+include kernel/raspberrypi/rpib2/AndroidKernel.mk
