@@ -1,2 +1,0 @@
-# audit2allow
-allow b2g sysfs_graphics:file { read write open };

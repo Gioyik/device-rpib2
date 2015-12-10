@@ -51,5 +51,3 @@ TARGET_USE_PAN_DISPLAY := true
 
 USE_CAMERA_STUB := true
 
-BOARD_SEPOLICY_DIRS := \
-    device/raspberrypi/rpib2/sepolicy

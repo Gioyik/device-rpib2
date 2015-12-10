@@ -1,2 +1,0 @@
-allow surfaceflinger ashmem_device:chr_file execute;
-allow surfaceflinger self:process execmem;
