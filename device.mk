@@ -26,7 +26,9 @@ PRODUCT_COPY_FILES := \
     $(PRODUCT_COPY_FILES)
 
 PRODUCT_PACKAGES += \
-    libGLES_android
+    libGLES_mesa \
+    gralloc.$(TARGET_PRODUCT) \
+    hwcomposer.$(TARGET_PRODUCT)
 
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.product.version = 1.0.0

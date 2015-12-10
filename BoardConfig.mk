@@ -25,6 +25,7 @@ TARGET_CPU_VARIANT := cortex-a7
 TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
 TARGET_CPU_SMP := true
+TARGET_BOARD_PLATFORM := bcm2709
 
 TARGET_COMPRESS_MODULE_SYMBOLS := false
 TARGET_PRELINK_MODULE := false
@@ -44,7 +45,11 @@ BOARD_USES_GENERIC_AUDIO := false
 BOARD_USES_USB_AUDIO := false
 
 BOARD_EGL_CFG := device/raspberrypi/rpib2/egl.cfg
+BOARD_GPU_DRIVERS := vc4
 USE_OPENGL_RENDERER := true
 TARGET_USE_PAN_DISPLAY := true
 
 USE_CAMERA_STUB := true
+
+BOARD_SEPOLICY_DIRS := \
+    device/raspberrypi/rpib2/sepolicy
