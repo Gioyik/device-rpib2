@@ -27,7 +27,7 @@ PRODUCT_COPY_FILES := \
 
 PRODUCT_PACKAGES += \
     libGLES_mesa \
-    gralloc.$(TARGET_PRODUCT) \
+    gralloc \
     hwcomposer.$(TARGET_PRODUCT)
 
 PRODUCT_PROPERTY_OVERRIDES += \
