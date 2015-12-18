@@ -28,7 +28,7 @@ PRODUCT_COPY_FILES := \
 PRODUCT_PACKAGES += \
     libGLES_mesa \
     gralloc.drm \
-    hwcomposer.$(TARGET_PRODUCT)
+    #hwcomposer.$(TARGET_PRODUCT)
 
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.product.version = 1.0.0
