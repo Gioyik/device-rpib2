@@ -14,4 +14,4 @@
 # limitations under the License.
 #
 
-add_lunch_combo rpib2-eng
+add_lunch_combo rpi2b-userdebug

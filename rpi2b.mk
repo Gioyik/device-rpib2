@@ -15,10 +15,10 @@
 #
 
 $(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base.mk)
-$(call inherit-product, device/raspberrypi/rpib2/device.mk)
+$(call inherit-product, device/raspberrypi/rpi2b/device.mk)
 
-PRODUCT_NAME := rpib2
-PRODUCT_DEVICE := rpib2
+PRODUCT_NAME := rpi2b
+PRODUCT_DEVICE := rpi2b
 PRODUCT_BRAND := FirefoxOS
 PRODUCT_MANUFACTER := raspberrypi
-PRODUCT_MODEL := rpib2
+PRODUCT_MODEL := rpi2b

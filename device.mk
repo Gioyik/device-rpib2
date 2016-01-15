@@ -33,4 +33,4 @@ PRODUCT_PACKAGES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.product.version = 1.0.0
 
-$(call inherit-product-if-exists, vendor/raspberrypi/rpib2/device-vendor.mk)
+$(call inherit-product-if-exists, vendor/raspberrypi/rpi2b/device-vendor.mk)
