@@ -4,8 +4,8 @@ config_hdmi_boost=4
 hdmi_group=1
 hdmi_mode=4
 disable_overscan=1
-framebuffer_width=1920
-framebuffer_height=1080
+framebuffer_width=1280
+framebuffer_height=720
 kernel=zImage
 device_tree=bcm2709-rpi-2-b.dtb
 initramfs ramdisk.img 0x01f00000
