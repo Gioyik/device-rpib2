@@ -7,7 +7,7 @@ on init
     write /sys/kernel/mm/ksm/run 1
 
 on fs
-    mount_all /fstab.rpib2
+    mount_all /fstab.rpi2b
 
 on post-fs-data
     mkdir /data/media 0770 media_rw media_rw
