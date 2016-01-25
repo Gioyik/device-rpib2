@@ -15,11 +15,12 @@
 #
 
 TARGET_NO_BOOTLOADER := true
-TARGET_NO_KERNEL := true
 TARGET_NO_RECOVERY := true
 TARGET_NO_RADIOIMAGE := true
 
 KERNEL_TOOLCHAIN := $(ANDROID_BUILD_TOP)/prebuilts/gcc/linux-x86/arm/arm-eabi-4.7/bin
+TARGET_USES_UNCOMPRESSED_KERNEL := false
+TARGET_KERNEL_CONFIG := aosp_bcm2709_b2g_defconfig
 
 TARGET_ARCH := arm
 TARGET_ARCH_VARIANT := armv7-a-neon
