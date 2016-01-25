@@ -19,6 +19,8 @@ TARGET_NO_KERNEL := true
 TARGET_NO_RECOVERY := true
 TARGET_NO_RADIOIMAGE := true
 
+KERNEL_TOOLCHAIN := $(ANDROID_BUILD_TOP)/prebuilts/gcc/linux-x86/arm/arm-eabi-4.7/bin
+
 TARGET_ARCH := arm
 TARGET_ARCH_VARIANT := armv7-a-neon
 TARGET_CPU_VARIANT := cortex-a7
