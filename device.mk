@@ -23,6 +23,7 @@ PRODUCT_COPY_FILES := \
     $(LOCAL_PATH)/init.rpi2b.rc:root/init.rpi2b.rc \
     $(LOCAL_PATH)/fstab.rpi2b:root/fstab.rpi2b \
     $(LOCAL_PATH)/Generic.kl:system/usr/keylayout/Generic.kl \
+    $(LOCAL_PATH)/rpi-debug.sh:system/bin/rpi-debug.sh \
     $(PRODUCT_COPY_FILES)
 
 PRODUCT_PACKAGES += \
@@ -32,5 +33,9 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.product.version = 1.0.0
+    rpi.debug = 1
+    rpi.debug.ipv6 = 0
+    rpi.net.ip = 10.243.28.223/21
+    rpi.net.gw = 10.243.24.1
 
 $(call inherit-product-if-exists, vendor/raspberrypi/rpi2b/device-vendor.mk)

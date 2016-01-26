@@ -41,3 +41,24 @@ service iprenew_eth0 /system/bin/dhcpcd -n
     class late_start
     disabled
     oneshot
+
+service rpi_debug /system/bin/rpi-debug.sh
+    class main
+    user root
+    disabled
+    oneshot
+
+service rpi_debug_ipv6 /system/bin/rpi-debug.sh ipv6
+    class main
+    user root
+    disabled
+    oneshot
+
+on property:rpi.debug=1
+    start rpi_debug
+
+on property:rpi.debug=1 && property:rpi.debug.ipv6=1
+    start rpi_debug_ipv6
+
+on property:rpi.debug=0
+    start iprenew_eth0
