@@ -1,0 +1,186 @@
+#!/bin/bash
+
+set -e
+
+# We should handle Android arguments:
+#   --kernel <path to kernel>          => to copy directly to boot partition
+#   --ramdisk <path to ramdisk.img>    => to copy directly to boot partition
+#   --cmdline "content of cmdline"     => to dump as cmdline.txt in boot partition
+#   --dt <path to device tree>         => to copy directly to boot partition
+#   --output <path to resulting img>   => path of the boot.img to create
+# We should ignore Android arguments:
+#   --base; --pagesize;
+# We should handle our specific arguments:
+#   --bootcode   <path to bootcode.bin> => to copy directly to boot partition
+#   --configtxt  <path to config.txt>   => to copy directly to boot partition
+#   --fixupdat   <path to fixup.dat>    => to copy directly to boot partition
+#   --startelf   <path to start.elf>    => to copy directly to boot partition
+#   --partsize   <size in bytes>       => size of the boot partition
+
+usage() {
+echo "$0 OPTIONS SPECIFICS
+With OPTIONS being:
+	-k, --kernel	KERNEL		Path to the kernel image to use
+	-r, --ramdisk	RAMDISK		Path to the ramdisk image to use
+	-c, --cmdline	CMDLINE		Content to place in cmdline.txt
+	-d, --dt	DT		Path to the device tree DTB file
+	-o, --output	OUTPUT		Output boot.img to produce
+
+With SPECIFICS being:
+	-b, --bootcode	BOOTCODE	Path to bootcode.bin to place in boot partition
+	-t, --configtxt	CONFIGTXT	Path to config.txt to place in boot partition
+	-f, --fixupdat	FIXUPDAT	Path to fixup.dat to place in boot partition
+	-s, --startelf	STARTELF	Path to start.elf to place in boot partition
+        -p, --partsize	PARTSIZE	Size of the partition in bytes
+"
+}
+
+# options may be followed by one colon to indicate they have a required argument
+if ! options=$(getopt -o hk:r:c:d:b:t:f:s:o:p: -l help,kernel:,ramdisk:,cmdline:,dt:,bootcode:,configtxt:,fixupdat:,startelf:,output:,partsize: -- "$@")
+then
+    # something went wrong, getopt will put out an error message for us
+    exit 1
+fi
+
+eval set -- "$options"
+
+kernel=
+ramdisk=
+cmdline=
+dt=
+output=
+bootcode=
+configtxt=
+fixupdat=
+startelf=
+partsize=
+
+while [ $# -gt 0 ]
+do
+    case "$1" in
+    -k|--kernel)	kernel=$(echo "$2" | sed -e "s/'//g"); shift 2 ;;
+    -r|--ramdisk)	ramdisk=$(echo "$2" | sed -e "s/'//g"); shift 2 ;;
+    -c|--cmdline)	cmdline=$(echo "$2" | sed -e "s/'//g"); shift 2 ;;
+    -d|--dt)		dt=$(echo "$2" | sed -e "s/'//g"); shift 2 ;;
+    -o|--output)	output=$(echo "$2" | sed -e "s/'//g"); shift 2 ;;
+    -b|--bootcode)	bootcode=$(echo "$2" | sed -e "s/'//g"); shift 2 ;;
+    -t|--configtxt)	configtxt=$(echo "$2" | sed -e "s/'//g"); shift 2 ;;
+    -f|--fixupdat)	fixupdat=$(echo "$2" | sed -e "s/'//g"); shift 2 ;;
+    -s|--startelf)	startelf=$(echo "$2" | sed -e "s/'//g"); shift 2 ;;
+    -p|--partsize)      partsize=$(echo "$2" | sed -e "s/'//g"); shift 2 ;;
+    -h|--help)		usage; shift; exit 0 ;;
+    (--)		break;;
+    (-*) echo "$0: error - unrecognized option $1" 1>&2; exit 1;;
+    (*) break;;
+    esac
+done
+
+dump_vars()
+{
+    echo "kernel=${kernel}"
+    echo "ramdisk=${ramdisk}"
+    echo "cmdline=${cmdline}"
+    echo "dt=${dt}"
+    echo "output=${output}"
+    echo "bootcode=${bootcode}"
+    echo "configtxt=${configtxt}"
+    echo "fixupdat=${fixupdat}"
+    echo "startelf=${startelf}"
+    echo "partsize=${partsize}"
+}
+
+check_file()
+{
+    if [ ! -f "$1" ]; then
+        echo "No $2 at $1"
+	return 1
+    fi;
+}
+
+check_vars()
+{
+    check_file "${kernel}" "kernel" || return 1
+    check_file "${ramdisk}" "ramdisk" || return 1
+    check_file "${dt}" "device tree" || return 1
+    check_file "${bootcode}" "bootcode.bin" || return 1
+    check_file "${configtxt}" "config.txt" || return 1
+    check_file "${fixupdat}" "fixup.dat" || return 1
+    check_file "${startelf}" "start.elf" || return 1
+
+    if [ -z "${output}" ]; then
+        echo "Empty output variable, no idea where to write boot image ..."
+        return 1
+    fi;
+
+    if [ -z "${cmdline}" ]; then
+        echo "Empty cmdline variable, no idea what to put in cmdline.txt"
+        return 1
+    fi;
+
+    if [ ${partsize} -le 8388608 ]; then
+        echo "Please use more than 8MB for boot partition"
+        return 1
+    fi;
+
+    # All good, return 0
+    echo "All good, no error."
+    return 0
+}
+
+# Should dump vars in case of issue and exit 1
+check_vars || (echo "ERROR!!!"; dump_vars; exit 1)
+
+# check for mkdosfs, mcopy in PATH
+for i in mkdosfs mcopy mdir; do
+    if ! which "$i" &> /dev/null; then
+        echo "Missing required program $i"
+        exit 1
+    fi
+done
+
+if [ -z "${ANDROID_PRODUCT_OUT}" ]; then
+    echo "ANDROID_PRODUCT_OUT is empty, cannot continue.";
+    exit 1;
+fi;
+
+# Cleanup previous boot.img
+rm "${output}" || true
+
+BOOTIMG_BASEDIR=${ANDROID_PRODUCT_OUT}/boot
+if [ ! -d "${BOOTIMG_BASEDIR}" ]; then
+    mkdir -p "${BOOTIMG_BASEDIR}"
+else
+    rm "${BOOTIMG_BASEDIR}/*" || true
+fi;
+
+# Should be in sync with config.txt
+cp "${kernel}" "${BOOTIMG_BASEDIR}/zImage"
+cp "${ramdisk}" "${BOOTIMG_BASEDIR}/"
+# Should be in sync with config.txt
+cp "${dt}" "${BOOTIMG_BASEDIR}/"
+
+# Raspberry Pi specific boot parts
+cp "${bootcode}" "${BOOTIMG_BASEDIR}/"
+cp "${configtxt}" "${BOOTIMG_BASEDIR}/"
+cp "${fixupdat}" "${BOOTIMG_BASEDIR}/"
+cp "${startelf}" "${BOOTIMG_BASEDIR}/"
+
+echo "${cmdline}" > "${BOOTIMG_BASEDIR}/cmdline.txt"
+
+### From https://github.com/CyanogenMod/android_bootable_userfastboot/blob/cm-12.1/make_vfatfs
+img_size=$((${partsize} / 1024))
+# Round the size of the disk up to 32K so that total sectors is
+# a multiple of sectors per track (mtools complains otherwise)
+mod=$((img_size % 32))
+if [ $mod != 0 ]; then
+    img_size=$(($img_size + 32 - $mod))
+fi
+
+echo "Create FAT filesystem of size ${img_size}"
+# It looks like we cannot use 32MB with FAT32. But 48MB works.
+mkdosfs -F 32 -n "BOOT" -C ${output} ${img_size}
+mcopy -v -p -s -Q -i "${output}" "${BOOTIMG_BASEDIR}/"* ::/
+
+ls -al "${BOOTIMG_BASEDIR}/"
+ls -al "${output}"
+mdir -i "${output}"
