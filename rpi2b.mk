@@ -22,3 +22,12 @@ PRODUCT_DEVICE := rpi2b
 PRODUCT_BRAND := FirefoxOS
 PRODUCT_MANUFACTER := raspberrypi
 PRODUCT_MODEL := rpi2b
+
+EXPORT_DEVICE_PREFS := $(LOCAL_PATH)/prefs
+
+GECKO_CONFIGURE_ARGS := \
+	--disable-b2g-bt \
+	--disable-b2g-ril
+
+BOARD_GAIA_MAKE_FLAGS := NOFTU=1 NO_LOCK_SCREEN=1
+

@@ -1,4 +1,7 @@
-ro.kernel.qemu=1
+ro.kernel.qemu=0
 ro.sf.lcd_density=213
-ro.opengles.version=131072
-debug.drm.mode.force=1280x720
+#ro.opengles.version=131072
+#debug.drm.mode.force=1280x720
+rpi.debug=1
+rpi.net.ip=192.168.1.12/24
+rpi.net.gw=192.168.1.1
