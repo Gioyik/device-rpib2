@@ -28,14 +28,14 @@ PRODUCT_COPY_FILES := \
 
 PRODUCT_PACKAGES += \
     libGLES_mesa \
-    gralloc.drm \
+    gralloc.rpi2b
     #hwcomposer.$(TARGET_PRODUCT)
 
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.product.version = 1.0.0
     rpi.debug = 1
     rpi.debug.ipv6 = 0
-    rpi.net.ip = 10.243.28.223/21
-    rpi.net.gw = 10.243.24.1
+    rpi.net.ip = 192.168.1.12/24
+    rpi.net.gw = 192.168.1.1
 
 $(call inherit-product-if-exists, vendor/raspberrypi/rpi2b/device-vendor.mk)
