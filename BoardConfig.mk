@@ -60,8 +60,9 @@ BOARD_MKBOOTIMG_ARGS := \
 BOARD_KERNEL_CMDLINE := initrd=0x01f00000 dwc_otg.lpm_enable=0
 BOARD_KERNEL_CMDLINE += console=ttyAMA0,115200 no_console_suspend root=/dev/ram0
 BOARD_KERNEL_CMDLINE += elevator=deadline rootwait androidboot.hardware=rpi2b
+BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
 # Activate this flag if DRM kernel driver needs to be traced on dmesg
-BOARD_KERNEL_CMDLINE += drm.debug=0xf
+#BOARD_KERNEL_CMDLINE += drm.debug=0xf
 
 BOARD_FLASH_BLOCK_SIZE := 4096
 BOARD_MALLOC_ALIGNMENT := 16
