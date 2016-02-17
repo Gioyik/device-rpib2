@@ -24,6 +24,7 @@ PRODUCT_COPY_FILES := \
     $(LOCAL_PATH)/fstab.rpi2b:root/fstab.rpi2b \
     $(LOCAL_PATH)/Generic.kl:system/usr/keylayout/Generic.kl \
     $(LOCAL_PATH)/rpi-debug.sh:system/bin/rpi-debug.sh \
+    $(LOCAL_PATH)/volume.cfg:system/etc/volume.cfg \
     $(PRODUCT_COPY_FILES)
 
 PRODUCT_PACKAGES += \
