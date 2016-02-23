@@ -3,3 +3,5 @@
 //user_pref("layers.bench.enabled", true);
 //user_pref("gfx.layerscope.enabled", true)
 user_pref("layout.frame_rate", 0);
+user_pref("layers.gralloc.disable", true);
+
