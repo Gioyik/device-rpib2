@@ -1,0 +1,8 @@
+{
+  "name": "B2G",
+  "version": "alpha",
+  "release_date": "2016-02-21",
+  "kernel": "4.2.8",
+  "description": "A port of B2G for the Raspberry Pi 2",
+  "url": "http://www.mozilla.org/"
+}

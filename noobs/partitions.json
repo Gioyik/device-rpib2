@@ -1,0 +1,33 @@
+{
+  "partitions": [
+    {
+      "label": "boot",
+      "filesystem_type": "FAT",
+      "partition_size_nominal": 49,
+      "want_maximised": false,
+      "uncompressed_tarball_size": 2
+    },
+    {
+      "label": "system",
+      "filesystem_type": "ext4",
+      "partition_size_nominal": 537,
+      "want_maximised": false,
+      "uncompressed_tarball_size": 200
+    },
+    {
+      "label": "cache",
+      "filesystem_type": "ext4",
+      "partition_size_nominal": 140,
+      "want_maximised": false,
+      "uncompressed_tarball_size": 1
+    },
+    {
+      "label": "userdata",
+      "filesystem_type": "ext4",
+      "partition_size_nominal": 2048,
+      "want_maximised": true,
+      "mkfs_options": "-O ^huge_file",
+      "uncompressed_tarball_size": 60
+    }
+  ]
+}
