@@ -26,7 +26,7 @@ PRODUCT_COPY_FILES := \
     $(LOCAL_PATH)/rpi-debug.sh:system/bin/rpi-debug.sh \
     $(LOCAL_PATH)/volume.cfg:system/etc/volume.cfg \
 		$(LOCAL_PATH)/noobs/os.json:NOOBS/os.json \
-		$(LOCAL_PATH)/noobs/partition_setup.json:NOOBS/partition_setup.json \
+		$(LOCAL_PATH)/noobs/partition_setup.sh:NOOBS/partition_setup.sh \
 		$(LOCAL_PATH)/noobs/partitions.json:NOOBS/partitions.json \
 		$(LOCAL_PATH)/noobs/fstab.rpi2b:NOOBS/fstab.rpi2b \
     $(PRODUCT_COPY_FILES)
