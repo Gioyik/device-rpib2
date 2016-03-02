@@ -14,5 +14,9 @@
 # limitations under the License.
 #
 
-PRODUCT_MAKEFILES := $(LOCAL_DIR)/rpi2b.mk
-PRODUCT_MAKEFILES := $(LOCAL_DIR)/noobs.mk
+LOCAL_PATH := $(call my-dir)
+include $(CLEAR_VARS)
+LOCAL_MODULE := noobs
+
+all :
+	ECHO_RESULT := $(shell ($(LOCAL_PATH)/noobs/noobs_package.sh))
