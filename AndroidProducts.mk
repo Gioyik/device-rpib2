@@ -15,4 +15,3 @@
 #
 
 PRODUCT_MAKEFILES := $(LOCAL_DIR)/rpi2b.mk
-PRODUCT_MAKEFILES := $(LOCAL_DIR)/noobs.mk

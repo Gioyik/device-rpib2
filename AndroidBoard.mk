@@ -15,8 +15,7 @@
 #
 
 LOCAL_PATH := $(call my-dir)
-include $(CLEAR_VARS)
-LOCAL_MODULE := noobs
 
-all :
-	ECHO_RESULT := $(shell ($(LOCAL_PATH)/noobs/noobs_package.sh))
+ifneq ($(strip $(INSTALL_NOOBS)),true)
+	PACKAGING := $(shell ($(TARGET_PRODUCT)/noobs_package.sh))
+endif
